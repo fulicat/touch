@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>$.fn.touch</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+html{
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+</style>
+</head>
+<body>
+	<h3>$.fn.touch</h3>
+	<p>
+		function:<br>when finger touches moved out of element borders then cancel touchend event<br><br>
+		useage:<br>$('#button').touch('end', function(e){});<br>$(document).touch('end', '#button', function(e){});<br>
+	</p>
+
+	<button type="button" class="button1" id="button1">button</button>
+	<button type="button" class="button2" id="button2">button2</button>
+	<a href="javascript:void(0)" id="abutton">abutton</a>
+	
+	<pre id="log"></pre>
+<script src="lib/zepto.min.js"></script>
+<script src="touch.min.js"></script>
+<script>
+$(document).touch('start', 'button', function (e){
+	$('#log').prepend('<p>'+ this.nodeName +'|'+ e.type +'</p>');
+}).touch('end', 'button', function (e){
+	$('#log').prepend('<p>'+ this.nodeName +'|'+ e.type +'</p>');
+});
+$('#abutton').touch('start', function (e){
+	$('#log').prepend('<p>'+ this.nodeName +'|'+ e.type +'</p>');
+}).touch('end', function (e){
+	$('#log').prepend('<p>'+ this.nodeName +'|'+ e.type +'</p>');
+});
+
+$('body').append('<button type="button">test</button>');
+$('body').append('<a href="javascript:void(0)">no event</a>');
+</script>
+</body>
+</html>
